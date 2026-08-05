@@ -4,6 +4,7 @@ package JFX000;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -11,25 +12,48 @@ public class TableauFX extends Pane{
 	
 	private int largeur, hauteur;
 	private Pane pane;
+	private int caseWidth, caseHeight;
 	
-	public TableauFX(int largeur, int hauteur) {
+	public class Case extends TextField{
+		private int largeur, hauteur;
+		
+		public Case(String text) {
+			super(text);
+			this.largeur = caseWidth;
+			this.hauteur = caseHeight;
+			this.setMaxWidth(largeur);
+			this.setMaxHeight(hauteur);
+		}
+		
+		public Case(String text, int larg, int haut) {
+			super(text);
+			this.largeur = larg;
+			this.hauteur = haut;
+			this.setMaxWidth(largeur);
+			this.setMaxHeight(hauteur);
+		}
+	}
+	
+	public TableauFX(int largeur, int hauteur, int caseWidth, int caseHeight) {
 		super();
 		this.largeur = largeur;
 		this.hauteur = hauteur;
+		this.caseWidth = caseWidth;
+		this.caseHeight = caseHeight;
 		GridPane grid = new GridPane();
 		
-		TextArea t1 = new TextArea("text 1");
-		t1.setMaxHeight(20);
-		t1.setMaxWidth(200);
 		
-		TextArea t2 = new TextArea("text 2");
-		TextArea t3 = new TextArea("text 3");
-		TextArea t4 = new TextArea("text 4");
-		TextArea t5 = new TextArea("text 5");
-		TextArea t6 = new TextArea("text 6");
-		TextArea t7 = new TextArea("text 7");
-		TextArea t8 = new TextArea("text 8");
-		TextArea t9 = new TextArea("text 9");
+		
+		TextField t1 = new Case("text 1");
+		
+		TextField t2 = new Case("text 2");
+		TextField t3 = new Case("text 3");
+		TextField t4 = new Case("text 4");
+		TextField t5 = new Case("text 5");
+		TextField t6 = new Case("text 6");
+		TextField t7 = new Case("text 7");
+		TextField t8 = new Case("text 8");
+		TextField t9 = new Case("text 9");
 
 
         grid.add(t1, 0, 0, 1, 1);

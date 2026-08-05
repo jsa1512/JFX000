@@ -1,9 +1,5 @@
 package JFX000;
 
-
-
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -11,8 +7,8 @@ import javafx.scene.layout.Pane;
 public class TableauFX extends Pane{
 	
 	private int largeur, hauteur;
-	private Pane pane;
 	private int caseWidth, caseHeight;
+	private Case[][] cases;
 	
 	public class Case extends TextField{
 		private int largeur, hauteur;
@@ -40,52 +36,44 @@ public class TableauFX extends Pane{
 		this.hauteur = hauteur;
 		this.caseWidth = caseWidth;
 		this.caseHeight = caseHeight;
+		
+		this.cases = new Case[largeur - 1][hauteur - 1];
+		
+		
+		
 		GridPane grid = new GridPane();
 		
-		
-		
-		TextField t1 = new Case("text 1");
-		
-		TextField t2 = new Case("text 2");
-		TextField t3 = new Case("text 3");
-		TextField t4 = new Case("text 4");
-		TextField t5 = new Case("text 5");
-		TextField t6 = new Case("text 6");
-		TextField t7 = new Case("text 7");
-		TextField t8 = new Case("text 8");
-		TextField t9 = new Case("text 9");
+		for(int x = 0; x < largeur - 1; x++)
+			for(int y = 0; y < hauteur - 1; y++) {
+				int coul = (x + y) % 6;
+				String couleur;
+				
+				switch(coul) {
+				case 1:
+					couleur ="green";
+					break;
+				case 2:
+					couleur ="blue";
+					break;
+				case 3:
+					couleur ="red";
+					break;
+				case 4:
+					couleur ="white";
+					break;
+				default:
+					couleur ="yellow";
+					break;				
+				}
+				
+				cases[x][y] = new Case("case " + x + " " + y);
+				cases[x][y].setStyle("-fx-background-color: " + couleur + ";");
+				
+				grid.add(cases[x][y], x, y, 1, 1);
+				System.out.println("ajout de case " + x + " " + y);
+			}			
 
 
-        grid.add(t1, 0, 0, 1, 1);
-        grid.add(t2, 1, 0, 1, 1);
-        grid.add(t3, 2, 0, 1, 1);
-        grid.add(t4, 0, 1, 1, 1);
-        grid.add(t5, 1, 1, 1, 1);
-        grid.add(t6, 2, 1, 1, 1);
-        grid.add(t7, 0, 2, 1, 1);
-        grid.add(t8, 1, 2, 1, 1);
-        grid.add(t9, 2, 2, 1, 1);
-		
-//		Button button1 = new Button("Button 1");
-//        Button button2 = new Button("Button 2");
-//        Button button3 = new Button("Button 3");
-//        Button button4 = new Button("Button 4");
-//        Button button5 = new Button("Button 5");
-//        Button button6 = new Button("Button 6");
-//        Button button7 = new Button("Button 7");
-//        Button button8 = new Button("Button 8");
-//        Button button9 = new Button("Button 9");
-//
-//
-//        grid.add(button1, 0, 0, 1, 1);
-//        grid.add(button2, 1, 0, 1, 1);
-//        grid.add(button3, 2, 0, 1, 1);
-//        grid.add(button4, 0, 1, 1, 1);
-//        grid.add(button5, 1, 1, 1, 1);
-//        grid.add(button6, 2, 1, 1, 1);
-//        grid.add(button7, 0, 2, 1, 1);
-//        grid.add(button8, 1, 2, 1, 1);
-//        grid.add(button9, 2, 2, 1, 1);
         
         this.getChildren().add(grid);
         
